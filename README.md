@@ -61,7 +61,8 @@ Todos conectados via I2C:
 
 🖥️ Simulação Online
 ▶️ 🔗 Projeto no Tinkercad: https://www.tinkercad.com/things/axvVWG0wVHf/editel?returnTo=%2Fdashboard&sharecode=XTL2aAalOVtCPEbipjSoDDmAf6q0bY2dyR9jWh73FVo
-📹 🔗 Vídeo Demonstrativo no YouTube (substitua pelo link real)
+
+📹 🔗 Vídeo Demonstrativo no YouTube:
 
 🧪 Como Simular no Tinkercad:
 
