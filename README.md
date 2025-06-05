@@ -44,8 +44,11 @@ Jumpers, resistores, protoboard	Diversos
 
 📦 Diagrama do Sistema
 less
+
 Copiar
+
 Editar
+
 [Arduino Escravo 1]     [Arduino Escravo 2]
    HC-SR04                HC-SR04
        |                     |
@@ -101,6 +104,7 @@ Benefício	Descrição
 💻 Integração Web	Futuro suporte a mapa interativo e doações
 
 👥 Equipe de Desenvolvimento
+
 Jéssica Tavares – RM566220
 
 Luara Soares – RM561266
