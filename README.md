@@ -1,121 +1,130 @@
-💧 Dry City — Sistema de Monitoramento Inteligente Contra Enchentes
-🌊 Problema Inicial
-As enchentes são um dos maiores desafios ambientais e sociais no Brasil. Entre 1991 e 2022, foram mais de 21 mil inundações atingindo 110 milhões de brasileiros. Em 2023, 3,3 milhões de pessoas foram impactadas. Em 2024, o Rio Grande do Sul sofreu uma das piores tragédias de sua história, com mais de 170 mortos e R$ 20 bilhões em prejuízos econômicos.
 
-Causas principais:
+# 💧 DRYCity — Sistema de Monitoramento Inteligente Contra Enchentes
 
-Falta de políticas públicas eficazes
+Este projeto foi desenvolvido com o objetivo de oferecer uma **solução autônoma, de baixo custo e replicável** para o monitoramento de áreas de risco de enchentes. Utilizando comunicação I2C entre microcontroladores, sensores ultrassônicos e interface visual com LEDs, buzzer e LCD, o sistema detecta níveis críticos de água em tempo real, emitindo alertas imediatos e facilitando a resposta rápida em comunidades vulneráveis.
 
-Urbanização desordenada
+Ideal para regiões sem acesso à internet, zonas ribeirinhas, áreas urbanas de risco ou fins educacionais.
 
-Mudanças climáticas
+---
 
-Falta de tecnologia aplicada à prevenção
+## 📦 Funcionalidades Principais
 
-💡 Visão Geral da Solução
-A Dry City propõe uma solução de baixo custo, autônoma e replicável para monitoramento local de áreas de risco de enchentes. O sistema é composto por:
+- Leitura de **nível de água** em tempo real com sensores ultrassônicos.
+- Exibição no **display LCD I2C 16x2** com alternância manual e priorização automática de alertas críticos.
+- Sistema de **alerta visual** (LEDs) e **sonoro** (buzzer).
+- **Comunicação I2C** entre 1 Arduino mestre e 2 escravos.
+- Operação totalmente **offline**, sem necessidade de conexão à internet.
 
-📟 1 Arduino Mestre com LCD, LEDs, buzzer e botão de navegação
+---
 
-🌊 2 Arduinos Escravos com sensores ultrassônicos
+## ✅ Dependências
 
-🔗 Comunicação via barramento I2C
+Antes de compilar e carregar o projeto, certifique-se de instalar as seguintes bibliotecas na IDE do Arduino:
 
-🔧 Funcionalidades:
-Leitura de nível de água em tempo real
+- `Wire.h`
+- `LiquidCrystal_I2C.h`
 
-Priorização automática de alertas críticos
+Essas bibliotecas estão disponíveis no Gerenciador de Bibliotecas da IDE Arduino.
 
-Sistema visual (LEDs) e sonoro (buzzer)
+---
 
-Alternância entre sensores com botão físico
+## 🧰 Componentes Utilizados
 
-Funcionamento offline (sem internet)
+| Componente                    | Quantidade             |
+|------------------------------|------------------------|
+| Arduino Uno/Nano             | 3 (1 mestre + 2 escravos) |
+| Sensor Ultrassônico HC-SR04  | 2                      |
+| Display LCD I2C 16x2         | 1                      |
+| LEDs (vermelho, amarelo, verde) | 3                   |
+| Buzzer Piezo                 | 1                      |
+| Botão Push-Button            | 1                      |
+| Jumpers, resistores, protoboard | Diversos            |
 
-🛠️ Componentes Utilizados
-Componente	Quantidade
-Arduino Uno/Nano	3 (1 mestre + 2 escravos)
-Sensor Ultrassônico HC-SR04	2
-Display LCD 16x2 com I2C	1
-LEDs (vermelho, amarelo, verde)	3
-Buzzer Piezo	1
-Botão Push-Button	1
-Jumpers, resistores, protoboard	Diversos
+---
 
-📦 Diagrama do Sistema
-less
+## 💻 Montagem e Execução
 
-Copiar
+### Passo a Passo:
 
-Editar
+1. Instale a [IDE do Arduino](https://www.arduino.cc/en/software).
+2. Vá em **Sketch > Include Library > Manage Libraries...** e instale as bibliotecas listadas acima.
+3. Conecte os dispositivos conforme o mapeamento a seguir:
 
-[Arduino Escravo 1]     [Arduino Escravo 2]
-   HC-SR04                HC-SR04
-       |                     |
-       |                     |
-       +---------------------+
-                 |
-                 v
-         🧠 [Arduino Mestre]
-        LCD, LEDs, Buzzer, Botão
-Todos conectados via I2C:
-📘 Mestre: Wire.begin()
-📗 Escravos: Wire.begin(address)
+#### 📘 Arduino Mestre
 
-🖥️ Simulação Online
-▶️ 🔗 Projeto no Tinkercad: https://www.tinkercad.com/things/axvVWG0wVHf/editel?returnTo=%2Fdashboard&sharecode=XTL2aAalOVtCPEbipjSoDDmAf6q0bY2dyR9jWh73FVo
+```
+LED Verde         → D13  
+LED Amarelo       → D12  
+LED Vermelho      → D11  
+Buzzer            → D7  
+Botão             → D2  
+LCD I2C           → SDA/SCL (A4/A5 no Uno)
+```
 
-📹 🔗 Vídeo Demonstrativo no YouTube:
+#### 📗 Arduinos Escravos
 
-🧪 Como Simular no Tinkercad:
+```
+HC-SR04 Trigger   → D9  
+HC-SR04 Echo      → D8  
+I2C               → SDA/SCL (A4/A5 no Uno)
+```
 
-Crie 3 projetos separados (1 mestre, 2 escravos).
+> Cada escravo deve ter um **endereço I2C único** (ex: 8 e 9). Use `Wire.begin(address)` no `setup()` de cada escravo.
 
-Configure os endereços I2C dos escravos.
+4. Crie 3 projetos separados no Tinkercad (ou use o Wokwi para simulação I2C completa).
+5. Carregue o código correspondente em cada Arduino.
+6. Execute a simulação ou o sistema físico.
 
-Use o recurso de "Serial Monitor" para simular comunicação I2C entre as instâncias.
+---
 
-Nota: O suporte a múltiplos Arduinos em um mesmo projeto é limitado no Tinkercad — prefira o Wokwi.
+## 🧑‍💻 Execução do Sistema
 
-🔍 Código (Resumo das Responsabilidades)
-Arduino Escravo (cada um):
-Faz a leitura do sensor ultrassônico
+Após a inicialização, o display LCD mostra as leituras de nível de água de **um sensor por vez**, com alternância manual através do botão.
 
-Envia distância medida ao Arduino mestre via I2C
+### Estados e Ações:
 
-Arduino Mestre:
-Recebe as medições dos dois escravos
+| Estado  | Ação no Sistema                      |
+|---------|--------------------------------------|
+| Ideal   | LED Verde aceso                      |
+| Alerta  | LED Amarelo aceso                    |
+| Crítico | LED Vermelho + Buzzer acionado       |
 
-Exibe um sensor por vez no LCD
+- Em caso de **nível crítico**, a exibição é automaticamente priorizada no LCD.
+- O botão permite alternar entre os sensores manualmente.
 
-Com botão, permite alternar a exibição
+---
 
-Com nível crítico, prioriza a exibição automaticamente
+## 🔗 Simulação Online
 
-Ativa LED e buzzer em estados críticos
+- ▶️ **Projeto no Tinkercad:**  
+  [Acessar Simulação](https://www.tinkercad.com/things/axvVWG0wVHf/editel?returnTo=%2Fdashboard&sharecode=XTL2aAalOVtCPEbipjSoDDmAf6q0bY2dyR9jWh73FVo)
 
-✅ Benefícios
-Benefício	Descrição
-🛑 Alerta Imediato	LEDs e buzzer alertam em tempo real
-🌐 Sem Internet	Ideal para regiões desconectadas
-💸 Baixo Custo	Componentes acessíveis
-⚖️ Escalável	Basta adicionar mais escravos
-🔒 Confiável	Comunicação direta via I2C
-💻 Integração Web	Futuro suporte a mapa interativo e doações
+- 📹 **Vídeo Demonstrativo no YouTube:**  
+  *(inserir link quando disponível)*
 
-👥 Equipe de Desenvolvimento
+### 🧪 Como Simular no Tinkercad:
 
-Jéssica Tavares – RM566220
+- Crie 3 projetos separados (1 mestre, 2 escravos).
+- Configure os endereços I2C dos escravos com `Wire.begin(address)`.
+- Use o "Serial Monitor" para observar a comunicação entre Arduinos.
+- **Observação:** o suporte a múltiplos Arduinos em um único projeto é limitado no Tinkercad. Para simulação completa, considere usar o [Wokwi](https://wokwi.com/).
 
-Luara Soares – RM561266
+---
 
-Miguel Amaro – RM566200
+## 👥 Equipe de Desenvolvimento
 
-📂 Sobre o Projeto
-Este projeto é parte de uma iniciativa educacional para desenvolver soluções tecnológicas com impacto social real, focando em cidades vulneráveis a enchentes. A ideia é que comunidades possam montar seu próprio sistema, sem depender de infraestrutura avançada, com foco em:
+- **Jéssica Tavares** – RM566220  
+- **Luara Soares** – RM561266  
+- **Miguel Amaro** – RM566200  
 
-Monitoramento local
+---
 
-Ação imediata
+## 📂 Sobre o Projeto
 
-Integração com plataformas de apoio e cadastro
+Este projeto é parte de uma iniciativa educacional voltada ao desenvolvimento de **soluções tecnológicas com impacto social real**, especialmente voltadas para cidades e comunidades vulneráveis a enchentes.
+
+A ideia é capacitar comunidades a montar seu próprio sistema de monitoramento de forma simples e eficaz, com foco em:
+
+- Monitoramento local descentralizado  
+- Ação imediata em caso de risco  
+- Futuro suporte a plataformas de apoio e integração com redes de doadores
