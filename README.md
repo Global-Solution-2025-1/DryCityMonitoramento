@@ -99,8 +99,8 @@ Após a inicialização, o display LCD mostra as leituras de nível de água de 
 - ▶️ **Projeto no Tinkercad:**  
   [Acessar Simulação](https://www.tinkercad.com/things/axvVWG0wVHf/editel?returnTo=%2Fdashboard&sharecode=XTL2aAalOVtCPEbipjSoDDmAf6q0bY2dyR9jWh73FVo)
 
-- 📹 **Vídeo Demonstrativo no YouTube:**  
-  *(inserir link quando disponível)*
+- 📹 **Vídeo Demonstrativo no Linkedin:**  
+    [Acessar Vídeo](https://www.linkedin.com/posts/j%C3%A9ssica-vit%C3%B3ria-tavares_ol%C3%A1-rede-gostaria-de-compartilhar-activity-7336856734080073728-cGQ1?utm_source=share&utm_medium=member_ios&rcm=ACoAADq0jLcBBqxsr0aNodGa53U3fTw24xXytZQ)
 
 ### 🧪 Como Simular no Tinkercad:
 
